@@ -13,14 +13,20 @@ class PostController extends Controller
         return view('index', ['posts' => $posts]);
     }
 
-    public function store(Request $request)
-    {
-        return Post::create($request->all());
-    }
+    // public function store(Request $request)
+    // {
+    //     return Post::create($request->all());
+    // }
 
     public function show(Post $post)
     {
-        return $post;
+        return view('show', compact('post'));
+    }
+    
+
+    public function create()
+    {
+        return view('create');
     }
 
     public function update(Request $request, Post $post)
@@ -34,4 +40,17 @@ class PostController extends Controller
         $post->delete();
         return response()->noContent();
     }
+
+    public function store(Request $request)
+    {
+    $data = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+    ]);
+
+    Post::create($data);
+
+    return redirect('/posts'); 
+    }
+
 }

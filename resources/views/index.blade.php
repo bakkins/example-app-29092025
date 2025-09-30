@@ -8,6 +8,8 @@
 <body>
     <h1>Visi posti</h1>
 
+    <a href="/posts/create">Izveidot jaunu postu</a>
+    
     @if($posts->isEmpty())
         <p>Nav neviena posta.</p>
     @else
